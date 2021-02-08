@@ -9,13 +9,16 @@
 import Foundation
 
 struct Product {
-  let name: String
-  let imageName: String
-  let price: Int
-  let description: String
-  var isFavorite: Bool = false
+    let id: UUID = UUID()
+    let name: String
+    let imageName: String
+    let price: Int
+    let description: String
+    var isFavorite: Bool = false
 }
 
+extension Product: Decodable {}
+extension Product: Identifiable {}
 
 let productSamples = [
   Product(name: "나는야 무화과", imageName: "fig", price: 3100, description: "소화가 잘되고 변비에 좋은 달달한 국내산 무화과에요. 고기와 찰떡궁합!"),

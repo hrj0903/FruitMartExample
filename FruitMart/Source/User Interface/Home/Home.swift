@@ -9,17 +9,27 @@
 import SwiftUI
 
 struct Home: View {
+    let store: Store
+    
   var body: some View {
-    VStack {
-      ProductRow(product: productSamples[0])
-      ProductRow(product: productSamples[1])
-      ProductRow(product: productSamples[2])
+    NavigationView {
+        if #available(iOS 14.0, *) {
+            List(store.products) { product in
+                NavigationLink(
+                    destination: ProductDetailView(product: product)) {
+                    ProductRow(product: product)
+                }
+            }.navigationTitle("과일마트")
+        } else {
+            // Fallback on earlier versions
+        }
     }
   }
 }
 
 struct Home_Previews: PreviewProvider {
   static var previews: some View {
-    Home()
+    Home(store: Store())
+        .previewDevice("iPhone 11 Pro")
   }
 }
